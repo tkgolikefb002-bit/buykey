@@ -3,13 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ Thống Mua Key Tự Động 24/7</title>
+    <title>Hệ Thống Mua Key Tự Động 24/7 & Quản Trị</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS phong cách Admin Dark Mode bổ sung */
+        .admin-body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #e0e0e0;
+        }
+        .main-title {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(77, 171, 247, 0.5);
+        }
+        .login-card-admin {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            width: 400px;
+            border: 1px solid #333;
+        }
+        .admin-card-box {
+            background: #1e1e1e;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            flex: 1;
+            border: 1px solid #333;
+        }
+        .admin-input, .admin-select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            background: #2d2d2d;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .admin-input:focus, .admin-select:focus {
+            border-color: #4dabf7;
+        }
+        .admin-result-box {
+            margin-top: 15px;
+            padding: 10px;
+            background: #2d2d2d;
+            border: 1px dashed #444;
+            border-radius: 6px;
+            word-break: break-all;
+            font-size: 13px;
+            min-height: 24px;
+            text-align: center;
+            color: #ddd;
+            user-select: all;
+        }
+    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 selection:bg-emerald-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center justify-center p-4 selection:bg-emerald-500 selection:text-white">
 
-    <div class="max-w-5xl w-full flex flex-col md:flex-row gap-6 items-center justify-center">
+    <!-- ================= NÚT MỞ GIAO DIỆN ĐĂNG NHẬP ADMIN (Góc trên bên trái) ================= -->
+    <div class="absolute top-4 left-4 z-50">
+        <button onclick="openAdminModal()" class="bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-emerald-500 text-slate-300 hover:text-emerald-400 px-3 py-2 rounded-xl text-xs font-semibold shadow-lg transition flex items-center space-x-2 cursor-pointer">
+            <i class="fa-solid fa-lock text-emerald-400"></i>
+            <span>Admin Login</span>
+        </button>
+    </div>
+
+    <!-- ================= GIAO DIỆN CHÍNH (MUA KEY & TẢI TOOL) ================= -->
+    <div id="main-shop-container" class="max-w-5xl w-full flex flex-col md:flex-row gap-6 items-center justify-center">
 
         <!-- CỘT BÊN TRÁI: Mua key -->
         <div class="max-w-md w-full bg-slate-900/85 backdrop-blur-xl border border-slate-800/80 rounded-3xl p-6 shadow-2xl shadow-emerald-950/20">
@@ -145,7 +215,7 @@
             </div>
         </div>
 
-        <!-- CỘT BÊN PHẢI: Chia làm 2 cột nhỏ song song (TẢI TOOL & HƯỚNG DẪN) -->
+        <!-- CỘT BÊN PHẢI: Tải tool & Hướng dẫn song song -->
         <div class="w-full md:w-[540px] grid grid-cols-1 md:grid-cols-2 gap-4">
             
             <!-- CỘT TRÁI: TẢI TOOL -->
@@ -154,7 +224,6 @@
                     <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 border-b border-slate-800 pb-2">TẢI TOOL</h3>
                     
                     <div class="space-y-2.5">
-                        <!-- 1. Tải Tool Windows -->
                         <a href="https://drive.google.com/file/d/1AdHe1r4QuD7xgRI4jIn9-ViNhSnK6NTO/view?usp=drive_link" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800/80 hover:border-sky-500/50 text-slate-200 hover:text-sky-400 p-2.5 rounded-xl text-xs font-medium transition duration-200 flex items-center space-x-2.5 group cursor-pointer">
                             <div class="w-7 h-7 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center group-hover:scale-110 transition shrink-0">
                                 <i class="fa-brands fa-windows text-sm"></i>
@@ -165,7 +234,6 @@
                             </div>
                         </a>
 
-                        <!-- 2. Tải auto bản web -->
                         <a href="https://drive.google.com/drive/folders/1qFJFMlc9MDjC76qtYpoSxAJlRyhq5ghC?usp=sharing" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800/80 hover:border-violet-500/50 text-slate-200 hover:text-violet-400 p-2.5 rounded-xl text-xs font-medium transition duration-200 flex items-center space-x-2.5 group cursor-pointer">
                             <div class="w-7 h-7 rounded-lg bg-violet-500/10 text-violet-400 flex items-center justify-center group-hover:scale-110 transition shrink-0">
                                 <i class="fa-solid fa-globe text-sm"></i>
@@ -176,8 +244,7 @@
                             </div>
                         </a>
 
-                        <!-- 3. AUTO Treo CRM 1H -->
-                        <a href="https://drive.google.com/file/d/1uVGApuq7Mmf5pAhnhbx6q83NeOGSKSGU/view?usp=sharing" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800/80 hover:border-amber-500/50 text-slate-200 hover:text-amber-400 p-2.5 rounded-xl text-xs font-medium transition duration-200 flex items-center space-x-2.5 group cursor-pointer">
+                        <a href="https://drive.google.com/file/d/1uVGApuq7Mmf5pAhnhbx6q83NeOGSGU/view?usp=sharing" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800/80 hover:border-amber-500/50 text-slate-200 hover:text-amber-400 p-2.5 rounded-xl text-xs font-medium transition duration-200 flex items-center space-x-2.5 group cursor-pointer">
                             <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center group-hover:scale-110 transition shrink-0">
                                 <i class="fa-solid fa-clock-rotate-left text-sm"></i>
                             </div>
@@ -187,7 +254,6 @@
                             </div>
                         </a>
 
-                        <!-- 4. Tải App Android -->
                         <a href="https://github.com/tkgolikefb002-bit/call_/releases/download/v1.0.2/app-debug.zip" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800/80 hover:border-emerald-500/50 text-slate-200 hover:text-emerald-400 p-2.5 rounded-xl text-xs font-medium transition duration-200 flex items-center space-x-2.5 group cursor-pointer">
                             <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition shrink-0">
                                 <i class="fa-brands fa-android text-sm"></i>
@@ -213,13 +279,12 @@
                 </div>
             </div>
 
-            <!-- CỘT PHẢI: HƯỚNG DẪN (Được sắp xếp tương ứng song song với các tool bên trái) -->
+            <!-- CỘT PHẢI: HƯỚNG DẪN -->
             <div class="bg-slate-900/80 border border-slate-800/80 rounded-2xl p-4 shadow-xl space-y-3 flex flex-col justify-between">
                 <div>
                     <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 border-b border-slate-800 pb-2">HƯỚNG DẪN</h3>
                     
                     <div class="space-y-2.5">
-                        <!-- 1. Hướng Dẫn Sử Dụng (Đi song song với Tải Tool Windows) -->
                         <a href="https://drive.google.com/drive/folders/1XJmoiyxpuVpeNrbf2l-oCO-bjBQgvRaN?usp=sharing" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800/80 hover:border-amber-500/50 text-slate-200 hover:text-amber-400 p-2.5 rounded-xl text-xs font-medium transition duration-200 flex items-center space-x-2.5 group cursor-pointer">
                             <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center group-hover:scale-110 transition shrink-0">
                                 <i class="fa-solid fa-book-open text-sm"></i>
@@ -230,7 +295,6 @@
                             </div>
                         </a>
 
-                        <!-- 2. Hướng Dẫn Cài Bản Web (Đi song song với Tải auto bản web) -->
                         <a href="./huong-dan.pdf" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800/80 hover:border-red-500/50 text-slate-200 hover:text-red-400 p-2.5 rounded-xl text-xs font-medium transition duration-200 flex items-center space-x-2.5 group cursor-pointer">
                             <div class="w-7 h-7 rounded-lg bg-red-500/10 text-red-400 flex items-center justify-center group-hover:scale-110 transition shrink-0">
                                 <i class="fa-solid fa-file-pdf text-sm"></i>
@@ -248,26 +312,93 @@
 
     </div>
 
+    <!-- ================= GIAO DIỆN ADMIN QUẢN TRỊ (ẨN MẶC ĐỊNH) ================= -->
+    <div id="admin-panel-container" class="hidden admin-body w-full min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="admin-wrapper" id="adminCard">
+            <div class="main-title">TRANG QUẢN TRỊ KEY</div>
+
+            <div class="admin-container flex flex-col md:flex-row gap-6 max-w-4xl w-full mb-6">
+                <!-- CỘT 1: NẠP TIỀN -->
+                <div class="admin-card-box flex-1">
+                    <h2 class="text-lg font-bold text-sky-400 text-center mb-4">💳 Nạp Tiền Chat & Messenger</h2>
+                    
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Mã Máy (HWID):</label>
+                    <input type="text" id="hwid" class="admin-input mb-3" placeholder="Dán mã PC_... của khách vào đây">
+                    
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Số tiền cần cộng (VNĐ):</label>
+                    <input type="number" id="amount" class="admin-input mb-4" placeholder="Ví dụ: 50000">
+                    
+                    <button class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition cursor-pointer shadow-lg shadow-emerald-950/40" onclick="addBalance()">Cộng Tiền Ngay</button>
+                    <div id="resultBalance" class="admin-result-box text-slate-400">Chưa có thao tác</div>
+                </div>
+
+                <!-- CỘT 2: TẠO KEY HỆ THỐNG -->
+                <div class="admin-card-box flex-1">
+                    <h2 class="text-lg font-bold text-sky-400 text-center mb-4">🔑 Tạo Key Hệ Thống</h2>
+                    
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Chọn Server Key:</label>
+                    <select id="serverType" class="admin-select mb-3" onchange="updateDurationOptions()">
+                        <option value="tool_tong_hop">Key Tool Tổng Hợp</option>
+                        <option value="callog">Key Callog</option>
+                        <option value="huy_hang">Web - Key Hủy Hàng (Y/C hoàn)</option>
+                        <option value="kien_van_de">Web - Key Kiện Vấn Đề</option>
+                        <option value="loc_hang">Web - Key Lọc Hàng Hủy</option>
+                    </select>
+                    
+                    <label class="block text-xs font-bold text-slate-400 mb-1">Thời hạn:</label>
+                    <select id="keyDuration" class="admin-select mb-4">
+                        <!-- Tự động cập nhật qua JS -->
+                    </select>
+                    
+                    <button class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition cursor-pointer shadow-lg shadow-blue-950/40" onclick="generateKey()">Tạo Key Mới</button>
+                    
+                    <label class="block text-xs font-bold text-slate-400 mt-4 mb-1">Kết quả Key:</label>
+                    <div id="resultKey" class="admin-result-box text-sky-400 font-bold">Chưa tạo key nào</div>
+                </div>
+            </div>
+
+            <!-- NÚT THOÁT / QUAY LẠI TRANG SHOP -->
+            <button class="bg-red-600 hover:bg-red-500 text-white font-bold px-8 py-3 rounded-xl transition cursor-pointer shadow-lg shadow-red-950/50" onclick="handleLogout()">Đăng Xuất / Trở Về Trang Chủ</button>
+        </div>
+    </div>
+
+    <!-- Modal Đăng Nhập Admin -->
+    <div id="admin-login-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="login-card-admin relative animate-fade-in text-center space-y-4">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-sm cursor-pointer">
+                <i class="fa-solid fa-xmark text-base"></i>
+            </button>
+            <h2 class="text-xl font-bold text-sky-400">🔐 Đăng Nhập Quản Trị</h2>
+            
+            <div class="text-left space-y-2">
+                <label class="block text-xs font-bold text-slate-400">Tên đăng nhập:</label>
+                <input type="text" id="username" class="admin-input" placeholder="Nhập tên đăng nhập...">
+                
+                <label class="block text-xs font-bold text-slate-400 mt-2">Mật khẩu:</label>
+                <input type="password" id="password" class="admin-input" placeholder="Nhập mật khẩu...">
+            </div>
+            
+            <button class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition cursor-pointer mt-4" onclick="handleLogin()">Đăng Nhập</button>
+            <div id="loginError" class="text-red-400 text-xs text-center mt-2"></div>
+        </div>
+    </div>
+
     <!-- Modal Zalo -->
     <div id="zalo-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 max-w-xs w-full text-center space-y-4 shadow-2xl relative animate-fade-in">
             <button onclick="closeZaloModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-sm cursor-pointer">
                 <i class="fa-solid fa-xmark text-base"></i>
             </button>
-            
             <div class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
                 <i class="fa-solid fa-comments"></i>
             </div>
-            
             <div>
                 <h3 class="font-bold text-white text-base">Liên hệ Admin Zalo</h3>
                 <p class="text-xs text-slate-400 mt-0.5">Quét mã QR hoặc bấm nút bên dưới</p>
             </div>
-
             <div class="bg-white p-3 rounded-2xl inline-block shadow-inner border border-slate-100">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://zalo.me/0876002224" alt="Zalo QR" class="w-44 h-44 mx-auto object-contain">
             </div>
-
             <div class="space-y-2">
                 <a href="https://zalo.me/0876002224" target="_blank" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-xl text-xs transition duration-200 flex items-center justify-center space-x-1.5">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -277,6 +408,7 @@
         </div>
     </div>
 
+    <!-- ================= JAVASCRIPT XỬ LÝ LOGIC ================= -->
     <script>
         let checkInterval = null;
         let currentOrderId = "";
@@ -286,6 +418,14 @@
         const ACCOUNT_NAME = "NGO THANH SON";
         const WORKER_URL = "https://buycall.tkgolikefb002.workers.dev";
 
+        window.onload = function() {
+            if(localStorage.getItem("isLoggedIn") === "true") {
+                showAdminPanel();
+            }
+            updateDurationOptions();
+        }
+
+        // --- Logic Shop & Thanh Toán QR ---
         function generateRandomOrder() {
             return "MUA" + Math.floor(100000 + Math.random() * 900000);
         }
@@ -319,6 +459,7 @@
                 const data = await response.json();
 
                 if (data.status === "success") {
+                    clearInterval(checkInterval);
                     document.getElementById("payment-section").classList.add("hidden");
                     document.getElementById("success-section").classList.remove("hidden");
                     document.getElementById("result-key").innerText = data.key;
@@ -363,6 +504,163 @@
         function closeZaloModal() {
             document.getElementById("zalo-modal").classList.add("hidden");
             document.getElementById("zalo-modal").classList.remove("flex");
+        }
+
+        // --- Logic Đăng Nhập & Bảng Quản Trị Admin ---
+        function openAdminModal() {
+            if(localStorage.getItem("isLoggedIn") === "true") {
+                showAdminPanel();
+            } else {
+                document.getElementById("admin-login-modal").classList.remove("hidden");
+                document.getElementById("admin-login-modal").classList.add("flex");
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById("admin-login-modal").classList.add("hidden");
+            document.getElementById("admin-login-modal").classList.remove("flex");
+        }
+
+        function handleLogin() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+            const errDiv = document.getElementById('loginError');
+
+            if(user === "admin" && pass === "Acb@4702001") {
+                localStorage.setItem("isLoggedIn", "true");
+                closeAdminModal();
+                showAdminPanel();
+            } else {
+                errDiv.innerText = "Sai tên đăng nhập hoặc mật khẩu!";
+            }
+        }
+
+        function showAdminPanel() {
+            document.getElementById('main-shop-container').classList.add('hidden');
+            document.getElementById('admin-panel-container').classList.remove('hidden');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem("isLoggedIn");
+            document.getElementById('admin-panel-container').classList.add('hidden');
+            document.getElementById('main-shop-container').classList.remove('hidden');
+            document.getElementById('username').value = "";
+            document.getElementById('password').value = "";
+        }
+
+        function updateDurationOptions() {
+            const serverType = document.getElementById('serverType').value;
+            const durationSelect = document.getElementById('keyDuration');
+            if(!durationSelect) return;
+            durationSelect.innerHTML = "";
+
+            let options = [];
+            if (serverType === "tool_tong_hop") {
+                options = [
+                    {text: "1 Ngày (1d)", value: "1d"},
+                    {text: "3 Ngày (3d)", value: "3d"},
+                    {text: "7 Ngày (7d)", value: "7d"},
+                    {text: "1 Tháng (1m)", value: "1m"}
+                ];
+            } else {
+                options = [
+                    {text: "1 Ngày", value: "1"},
+                    {text: "3 Ngày", value: "3"},
+                    {text: "7 Ngày", value: "7"},
+                    {text: "15 Ngày", value: "15"},
+                    {text: "30 Ngày", value: "30"},
+                    {text: "365 Ngày (1 Năm)", value: "365"}
+                ];
+            }
+
+            options.forEach(opt => {
+                let el = document.createElement("option");
+                el.value = opt.value;
+                el.textContent = opt.text;
+                durationSelect.appendChild(el);
+            });
+        }
+
+        async function addBalance() {
+            const hwid = document.getElementById('hwid').value.trim();
+            const amount = document.getElementById('amount').value;
+            const resDiv = document.getElementById('resultBalance');
+
+            if(!hwid || !amount) {
+                resDiv.style.color = '#ff6b6b';
+                resDiv.innerText = 'Vui lòng nhập đủ Mã Máy và Số Tiền!';
+                return;
+            }
+
+            resDiv.style.color = '#aaa';
+            resDiv.innerText = 'Đang xử lý...';
+
+            try {
+                let response = await fetch('https://chat.tkgolikefb002.workers.dev/add_balance', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        secret: "admin123", 
+                        hwid: hwid, 
+                        amount: parseFloat(amount) 
+                    })
+                });
+                let data = await response.json();
+                if(data.success) {
+                    resDiv.style.color = '#51cf66';
+                    resDiv.innerText = '✅ Thành công! Số dư mới: ' + data.new_balance.toLocaleString() + ' đ';
+                    document.getElementById('hwid').value = '';
+                    document.getElementById('amount').value = '';
+                } else {
+                    resDiv.style.color = '#ff6b6b';
+                    resDiv.innerText = '❌ Lỗi: ' + (data.error || 'Thất bại');
+                }
+            } catch(e) {
+                resDiv.style.color = '#ff6b6b';
+                resDiv.innerText = '❌ Lỗi kết nối hệ thống!';
+            }
+        }
+
+        async function generateKey() {
+            const serverType = document.getElementById('serverType').value;
+            const duration = document.getElementById('keyDuration').value;
+            const resKeyDiv = document.getElementById('resultKey');
+
+            let targetUrl = "";
+            if (serverType === "tool_tong_hop") {
+                targetUrl = `https://tm-key-server.tkgolikefb002.workers.dev/create?type=${duration}`;
+            } else if (serverType === "callog") {
+                targetUrl = `https://autocall-license.tkgolikefb002.workers.dev/create?days=${duration}`;
+            } else if (serverType === "huy_hang") {
+                targetUrl = `https://huyhangweb.tkgolikefb002.workers.dev/create-key?days=${duration}`;
+            } else if (serverType === "kien_van_de") {
+                targetUrl = `https://kienvande.tkgolikefb002.workers.dev/create-key?days=${duration}`;
+            } else if (serverType === "loc_hang") {
+                targetUrl = `https://lochang.tkgolikefb002.workers.dev/create-key?days=${duration}`;
+            }
+
+            resKeyDiv.style.color = '#aaa';
+            resKeyDiv.innerText = 'Đang tạo key từ server...';
+
+            try {
+                let response = await fetch(targetUrl);
+                let textResult = await response.text();
+                
+                try {
+                    let json = JSON.parse(textResult);
+                    let actualKey = json.key || json.license || json.code || json.message || textResult;
+                    
+                    resKeyDiv.style.color = '#51cf66';
+                    resKeyDiv.innerText = actualKey;
+                } catch(err) {
+                    resKeyDiv.style.color = '#51cf66';
+                    resKeyDiv.innerText = textResult;
+                }
+
+            } catch(e) {
+                resKeyDiv.style.color = '#ff6b6b';
+                resKeyDiv.innerText = '❌ Không thể kết nối tới server tạo key!';
+            }
         }
     </script>
 </body>
